@@ -10,8 +10,6 @@ import android.util.Log;
 import com.example.android.inventoryappstage1.data.InventoryDbHelper;
 import com.example.android.inventoryappstage1.data.InventoryContract;
 
-import com.example.android.inventoryappstage1.data.InventoryContract;
-import com.example.android.inventoryappstage1.data.InventoryDbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,9 +30,14 @@ InventoryDbHelper mDbHelper;
         insertBook();
     }
 
-private void insertBook(){
+    /**
+     * Used to insert data into the db
+     */
+    private void insertBook() {
     SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
+
+        // New entry to the inventory
     ContentValues values = new ContentValues();
 
     values.put(InventoryContract.InventoryEntry.PRODUCT_NAME, "Random book");
@@ -51,6 +54,12 @@ private void insertBook(){
         Log.v("MainActivity","New row "+newRowId);
     }
     }
+
+    /**
+     * Used to retrieve data from the db
+     *
+     * @return numbers of rows
+     */
     private Cursor readData() {
 
         SQLiteDatabase dbase = mDbHelper.getReadableDatabase();
@@ -78,7 +87,6 @@ private void insertBook(){
         }
         return cursor;
     }
-
     }
 
 

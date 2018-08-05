@@ -7,8 +7,11 @@ import com.example.android.inventoryappstage1.data.InventoryContract.InventoryEn
 
 public class InventoryDbHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    //Name of the database
     private static final String DATABASE_NAME = "Inventory.db";
+
+    //Version of the database
+    private static final int DATABASE_VERSION = 1;
 
     public InventoryDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -17,6 +20,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
+        //Creates a new table into the db
         String SQL_BOOK_TABLE = "CREATE TABLE "
                 + InventoryEntry.TABLE_NAME + " ("
                 + InventoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
