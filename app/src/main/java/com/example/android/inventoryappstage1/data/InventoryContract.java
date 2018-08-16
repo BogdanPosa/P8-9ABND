@@ -6,36 +6,26 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 
-//Outer class
 public class InventoryContract {
+    // To prevent someone from accidentally instantiating the contract class,
+    // give it an empty constructor.
 
     public InventoryContract() {
     }
 
-    public static final String CONTENT_AUTHORITY = "com.example.android.shelf";
-    public static final String PATH_BOOKS = "inventory";
+    public static final String CONTENT_AUTHORITY = "com.example.android.books";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    public static final String PATH_BOOKS = "inventory";
 
-
-
-    //Inner class
     public static final class InventoryEntry implements BaseColumns {
 
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_BOOKS);
 
-        public static final String CONTENT_LIST_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE +
-                        "/" + CONTENT_AUTHORITY +
-                        "/" + PATH_BOOKS;
-        public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE +
-                        "/" + CONTENT_AUTHORITY +
-                        "/" + PATH_BOOKS;
+        public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_BOOKS;
+        public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_BOOKS;
 
-        //Name of the table
-        public static final String TABLE_NAME = "shelf";
+        public static final String TABLE_NAME = "books";
 
-        //Columns of the table
         public final static String _ID = BaseColumns._ID;
         public final static String PRODUCT_NAME = "product";
         public final static String PRODUCT_PRICE = "price";
