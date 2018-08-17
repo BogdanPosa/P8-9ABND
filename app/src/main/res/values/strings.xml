@@ -46,4 +46,6 @@
     <string name="delete">Delete</string>
 
     <string name="cancel">Cancel</string>
+    <string name="desc_book2">Image when shelf is empty</string>
+    <string name="DescbBook1">Image in editor activity</string>
 </resources>

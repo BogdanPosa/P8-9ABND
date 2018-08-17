@@ -20,6 +20,7 @@
         android:visibility="gone">
 
         <ImageView
+            android:contentDescription="@string/desc_book2"
             android:id="@+id/empty_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,8 +30,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/empty_image"
-            android:fontFamily="sans-serif-medium"
             android:padding="16dp"
             android:text="@string/empty_text"
             android:textAlignment="center"
@@ -43,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/book_open_page_variant" />
 

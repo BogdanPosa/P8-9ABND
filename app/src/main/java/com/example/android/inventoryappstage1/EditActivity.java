@@ -63,10 +63,10 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
 //        set the activities attributes respectively
         if (mCurrentBookUri == null) {
-            setTitle("Add a new book");
+            setTitle("Add a new book1");
             invalidateOptionsMenu();
         } else {
-            setTitle("Edit a book details");
+            setTitle("Edit a book1 details");
             getLoaderManager().initLoader(EXISTING_BOOK_LOADER, null, this);
         }
 
