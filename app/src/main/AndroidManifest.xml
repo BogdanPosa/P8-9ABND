@@ -21,8 +21,10 @@
             android:authorities="com.example.android.books"
             android:exported="false" />
 
-        <activity android:name=".EditActivity" />
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".EditActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
     </application>
-
 </manifest>

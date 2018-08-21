@@ -3,6 +3,7 @@ package com.example.android.inventoryappstage1;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
@@ -118,7 +119,6 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onClick(View view) {
                 save();
-                finish();
             }
         });
 
@@ -160,7 +160,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onBackPressed() {
-        // If the pet hasn't changed, continue with handling back button press
+        // If the book hasn't changed, continue with handling back button press
         if (!mBookHasChanged) {
             super.onBackPressed();
             return;
@@ -236,7 +236,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if (TextUtils.isEmpty(nameString) || TextUtils.isEmpty(priceString) || TextUtils.isEmpty(quantityString) ||
                 TextUtils.isEmpty(supNameString) || TextUtils.isEmpty(supPhoneString)) {
-            Toast.makeText(this, "Please fill every fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
         } else {
             ContentValues values = new ContentValues();
             values.put(InventoryContract.InventoryEntry.PRODUCT_NAME, nameString);
@@ -266,7 +266,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
                     Toast.makeText(this, "Editor failed",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "It's saved !",
+                    Toast.makeText(this, "Book entry saved !",
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
@@ -275,7 +275,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
                     Toast.makeText(this, "Editor failed",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "It's saved !",
+                    Toast.makeText(this, "Book entry saved !",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -283,21 +283,33 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
-//    private void deleteBook() {
-//        if (mCurrentBookUri != null) {
-//            int rowDeleted = getContentResolver().delete(mCurrentBookUri, null, null);
-//            if (rowDeleted == 0) {
-//                Toast.makeText(this, "Edit failed on this one", Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(this, "Book successfully edited.", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//        finish();
-//    }
+    private void deleteBook() {
+        if (mCurrentBookUri != null) {
+            int rowDeleted = getContentResolver().delete(mCurrentBookUri, null, null);
+            if (rowDeleted == 0) {
+                Toast.makeText(this, "Edit failed on this one", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Book successfully deleted.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        finish();
+    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return null;
+        //define projection with all the columns in the table
+        String[] projection = {
+                InventoryContract.InventoryEntry._ID,
+                InventoryContract.InventoryEntry.PRODUCT_NAME,
+                InventoryContract.InventoryEntry.PRODUCT_QUANTITY,
+                InventoryContract.InventoryEntry.PRODUCT_PRICE,
+                InventoryContract.InventoryEntry.PRODUCT_SUPPLIER_NAME,
+                InventoryContract.InventoryEntry.PRODUCT_SUPPLIER_PHONE,
+
+        };
+        //This loader will execute ContentProvider's query in the background
+        return new CursorLoader(this, mCurrentBookUri,
+                projection, null, null, null);
     }
 
     @Override
@@ -339,7 +351,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Delete" button, so delete the pet.
-//                deleteBook();
+                deleteBook();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
